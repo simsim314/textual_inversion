@@ -18,7 +18,7 @@ model:
     use_ema: False
     embedding_reg_weight: 0.0
     unfreeze_model: True
-    model_lr: 1.0e-7
+    model_lr: 5.0e-7
 
     personalization_config:
       target: ldm.modules.embedding_manager.EmbeddingManager
@@ -76,7 +76,7 @@ data:
   target: main.DataModuleFromConfig
   params:
     batch_size: 1
-    num_workers: 2
+    num_workers: 1
     wrap: false
     train:
       target: ldm.data.personalized.PersonalizedBase
@@ -84,7 +84,7 @@ data:
         size: 512
         set: train
         per_image_tokens: false
-        repeats: 100
+        repeats: 1
     validation:
       target: ldm.data.personalized.PersonalizedBase
       params:
@@ -96,15 +96,15 @@ data:
 lightning:
   modelcheckpoint:
     params:
-      every_n_train_steps: 500
+      every_n_train_steps: 10000
   callbacks:
     image_logger:
       target: main.ImageLogger
       params:
-        batch_frequency: 500
-        max_images: 8
+        batch_frequency: 10
+        max_images: 1
         increase_log_steps: False
 
   trainer:
     benchmark: True
-    max_steps: 4200
+    max_steps: 100
