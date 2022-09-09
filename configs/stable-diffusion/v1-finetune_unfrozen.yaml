@@ -24,7 +24,7 @@ model:
       target: ldm.modules.embedding_manager.EmbeddingManager
       params:
         placeholder_strings: ["*"]
-        initializer_words: ["prn"]
+        initializer_words: ["pon"]
         per_image_tokens: false
         num_vectors_per_token: 2
         progressive_words: False
